@@ -1,3 +1,3 @@
-public class launcher {
+public class Launcher {
 
 }
