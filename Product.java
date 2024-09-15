@@ -31,5 +31,4 @@ public class Product {
         return "Producto: " + name + " | Category_Smartphones: " + category1 + " | Category_Accessories " + category2;
     }
 
-    
 }
