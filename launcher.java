@@ -1,5 +1,5 @@
 public class Launcher {
 public static void main(String[] args) {
-    new Store();
+    new Store_Manager();
 }
 }
