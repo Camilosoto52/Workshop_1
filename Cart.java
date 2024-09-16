@@ -8,14 +8,14 @@ public class Cart {
         products = new ArrayList<>();
     }
 
-    public void agregarProducto(Product product) {
+    public void addproduct(Product product) {
         products.add(product);
         System.out.println(product.getName() + " add to the cart ");
     }
 
-    public void eliminarProducto(Product producto) {
-        products.remove(producto);
-        System.out.println(producto.getName() + " removed from cart");
+    public void eliminarProducto(Product product) {
+        products.remove(product);
+        System.out.println(product.getName() + " removed from cart");
     }
 
    
