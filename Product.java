@@ -7,14 +7,15 @@ public class Product {
     }
 
     private String name;
+    private int id;
     private Smartphones category1;
     private Accessories category2;
     
-    public Product(String name, Smartphones category1) {
+    public Product(String name, int id, Smartphones category1) {
         this.name = name;
         this.category1 = category1;
     }
-    public Product(String name, Accessories category2) {
+    public Product(String name, int id, Accessories category2) {
         this.name = name;
         this.category2 = category2;
     }
@@ -22,10 +23,14 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    public int getId() {
+        return id;
+    }
     public Smartphones getSmartphones() {
         return category1;
     }
-    public Accessories getCategory_Accessories() {
+    public Accessories getAccessories() {
         return category2;
     }
     
