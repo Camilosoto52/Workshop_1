@@ -1,72 +1,112 @@
+/**
+ * This module will try to recreate an application for purchasing electronic devices.
+ *
+ * Copyright (C) 2024  Juan Camilo Soto Martinez  <juancamilosoto52@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free Software
+ * Foundation, either version 3 of the License, or (at your option) any later
+ * version.
+ *
+ * This program is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ * FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ * details.
+ *
+ * You should have received a copy of the GNU General Public License along with
+ * this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+/**
+ * This class represents an appliance store.
+ *
+ * Args:
+ *  input (Scanner): Allows me to enter the data.
+ *  receipts (ArrayList<Receipt>): Keep the receipts made.
+ *  shCart (ArrayList): It is the shopping cart where the chosen devices are stored.
+ *  com (boolean): It is used in some menus.
+ * 
+ */
 import java.util.Scanner;
 
 public class Store_Manager {
-    public static void main(String[] args) {
+    
         Store store = new Store();
         Cart cart = new Cart();
         Scanner scanner = new Scanner(System.in);
 
-        System.out.println(" Welcome to My virtual Shop");
+        System.out.println(" Welcome to My virtual Shop"){
 
         // Selecction Of Category 
-        boolean continuarCompra = true;
-        while (continuarCompra) {
-            System.out.println("Seleccione una categoría para ver los productos:");
-            for (Product.Smartphones category1 : Product.category1.values()) {
-                System.out.println("-Smartphones" + category1);
+        boolean continueBuy = true;
+        while (continueBuy) {
+            System.out.println("Select a category to view products:");
+            for (Product.Smartphones category1 : Product.Smartphones.values()) {
+                System.out.println("Smartphones" + category1);
             }
-            System.out.println("Seleccione una categoría para ver los productos:");
-            for (Product.Accessories  category2 : Product.category2.values()) {
-                System.out.println("-Accessories" + category2);
+            System.out.println("Select a category to view products:");
+            for (Product.Accessories  category2 : Product.Accessories.values()) {
+                System.out.println("Accessories" + category2);
             }
 
-            String inputCategoria = scanner.nextLine().toUpperCase();
-            Product.Smartphones categoriaSeleccionada;
-
+            String inputCategory = scanner.nextLine().toUpperCase();
+            Product.Smartphones categoryselected;
             try {
-                categoriaSeleccionada = Product.category1.valueOf(inputCategoria);
-                tienda.mostrarProductosPorCategoria(categoriaSeleccionada);
-            } catch (IllegalArgumentException e) {
-                System.out.println("Categoría no válida.");
+                categoryselected = Product.Smartphones.valueOf(inputCategory);
+                store.showproductsbySmartphones(categoryselected);
+                
+            }
+            catch (IllegalArgumentException e) {
+                System.out.println(" Invalid category ");
                 continue;
             }
 
-            // Agregar productos al carrito
-            boolean seguir = true;
-            while (seguir) {
-                System.out.print("Ingrese el ID del producto que desea agregar al carrito (0 para salir de la categoría): ");
+            try {
+                Product.Accessories categoryselected1 = Product.Accessories.valueOf(inputCategory);
+                store.showproductsbyAccesories(categoryselected1);
+                
+            } catch (IllegalArgumentException e) {
+                System.out.println(" Invalid category ");
+                continue;
+            }
+
+            // Add products to cart
+            boolean follow = true;
+            while (follow) {
+                System.out.print("Enter the name of the product (0 to exit : ");
                 int idProducto = scanner.nextInt();
                 if (idProducto == 0) {
                     seguir = false;
                 } else {
-                    Producto producto = tienda.obtenerProductoPorId(idProducto);
-                    if (producto != null) {
-                        carrito.agregarProducto(producto);
+                    Product product = store.ObtainProductById(idProducto);
+                    if (product != null) {
+                        cart.agregarProducto(Product product);
                     } else {
-                        System.out.println("Producto no encontrado.");
+                        System.out.println("Product doesnt finded");
                     }
                 }
             }
 
-            // Preguntar si desea seguir comprando en otra categoría
-            System.out.print("¿Desea seguir comprando? (S/N): ");
-            scanner.nextLine();  // Limpiar buffer
-            String respuesta = scanner.nextLine().toUpperCase();
-            if (respuesta.equals("N")) {
-                continuarCompra = false;
+            // Ask if you want to continue shopping in another category
+            System.out.print("Do you want to continue buying? (Y/N): ");
+            scanner.nextLine();  // Clean buffer
+            String answer = scanner.nextLine().toUpperCase();
+            if (answer.equals("N")) {
+                continueBuy = false;
             }
         }
 
-        // Crear cliente y realizar la orden
-        System.out.print("Ingrese su nombre: ");
-        String nombreCliente = scanner.nextLine();
-        System.out.print("Ingrese su dirección para el envío: ");
-        String direccion = scanner.nextLine();
+        // Create the customer and the order
+        System.out.print("Enter your name ");
+        String namecustomer = scanner.nextLine();
+        System.out.print("Enter your adress for shipping ");
+        String adress = scanner.nextLine();
 
-        Cliente cliente = new Cliente(nombreCliente, direccion);
-        Orden orden = new Orden(cliente, carrito);
+        Customer customer = new Customer(namecustomer, adress);
+        Order order = new Order(customer, cart);
 
-        // Despachar la orden
-        orden.despachar();
-    }
+        // Send the order
+        order.send();
+    
+}
 }

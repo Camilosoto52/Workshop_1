@@ -1,10 +1,5 @@
-public class Launcher {
-public static void main(String[] args) {
-    new Store_Manager();
-
-
-
-
-    
+public class launcher {
+    public static void main(String[] args) {
+        new Store_Manager();
 }
 }
